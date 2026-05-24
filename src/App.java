@@ -41,10 +41,10 @@ public class App {
     FaC.setBounds(150,210,110,30);
 
     JButton USD = new JButton("USD a COP");
-    USD.setBounds(30,210,110,30);
+    USD.setBounds(30,260,110,30);
 
     JButton COP = new JButton("COP a USD");
-    COP.setBounds(150,210,110,30);
+    COP.setBounds(150,260,110,30);
 
      //Eventos Diego
     suma.addActionListener(new ActionListener(){
@@ -130,7 +130,7 @@ public class App {
                 try{
                     int cel = Integer.parseInt(num1.getText());
                     double fa = (cel * 1.8) + 32;
-                    JOptionPane.showConfirmDialog(null,"°C son " + fa + "°F");
+                    JOptionPane.showMessageDialog(null,"°C son " + fa + "°F");
                 } catch(Exception error ) {
                     JOptionPane.showMessageDialog(null, "Error en los datos");
                 }
@@ -148,12 +148,119 @@ public class App {
                     double cel = (fa - 32) / 1.8;
                     JOptionPane.showMessageDialog(null, fa + "°F son " + cel + "°C");                     
                 } catch (Exception e) {
-                    JOptionPane.showConfirmDialog(null, "Error en los datos");
+                    JOptionPane.showMessageDialog(null, "Error en los datos");
+                }
+            }
+        }
+    });
+    
+    // Eventos creados por Gio
+    multiplicacion.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent accionMultiplicacion){
+            if (num1.getText().isEmpty() || num2.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debes llenar ambos campos");   
+            } else {
+                try{
+                    int n1 = Integer.parseInt(num1.getText());
+                    int n2 = Integer.parseInt(num2.getText());
+                    int resultadoMultiplicacion = n1 * n2;
+                    JOptionPane.showMessageDialog(null, "La multiplicación es:" + resultadoMultiplicacion);
+                } catch(Exception error) {
+                    JOptionPane.showMessageDialog(null,"Ingrese solo números enteros");
                 }
             }
         }
     });
 
+    division.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent accionDivision){
+            if (num1.getText().isEmpty() || num2.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debes llenar ambos campos");    
+            } else{
+                try {
+                    int n1 = Integer.parseInt(num1.getText());
+                    int n2 = Integer.parseInt(num2.getText());
+
+                    //validacion de un numero cero
+                    if (n1 == 0 || n2 == 0) {
+                        JOptionPane.showMessageDialog(null,"No se puede dividir por cero"); 
+                    } else {
+                        double resultadoDivision = n1 / n2; 
+                        JOptionPane.showMessageDialog(null,"La división es:"+ resultadoDivision);
+                    }
+                    } catch(Exception error){
+                        JOptionPane.showMessageDialog(null,"Ingrese solo números enteros");
+                    }
+            }
+        }
+    });
+
+    CaF.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent a){
+            if (num1.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Ingrese los grados en el primer campo");
+            } else {
+                try{
+                    int cel = Integer.parseInt(num1.getText());
+                    double fa = (cel * 1.8) + 32;
+                    JOptionPane.showMessageDialog(null,"°C son " + fa + "°F");
+                } catch(Exception error ) {
+                    JOptionPane.showMessageDialog(null, "Error en los datos");
+                }
+            }
+        }
+    });
+
+    FaC.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent f){
+            if(num1.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Ingrese el valor en el primer cuadro");
+            } else{
+                try {
+                    int fa = Integer.parseInt(num1.getText());
+                    double cel = (fa - 32) / 1.8;
+                    JOptionPane.showMessageDialog(null, fa + "°F son " + cel + "°C");                     
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error en los datos");
+                }
+            }
+        }
+    });
+
+
+    // Eventos finales Diego
+    USD.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent u){
+            if(num1.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Ingrese la cantidad en dolares");
+            } else{
+                try {
+                    int usd = Integer.parseInt(num1.getText());
+                    int cop = usd * 3600;
+                    JOptionPane.showMessageDialog(null, usd + "USD equivale a $" + cop + " COP");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Usar solo números enteros");
+                }
+            }
+        }
+    });
+
+    COP.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent cop){
+            if (num1.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Ingresa el valor en pesos (COP)");
+            } else {
+                try {
+                    int pesos = Integer.parseInt(num1.getText());
+                    double usd =  pesos / 3600;
+                    JOptionPane.showMessageDialog(null,"$" + pesos + "COP son " + usd + "USD");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null,"Error númerico");
+                }
+            }
+        }
+    });
+  
 
 
 
@@ -164,6 +271,7 @@ public class App {
     ventana.add(suma); ventana.add(resta);
     ventana.add(multiplicacion); ventana.add(division);
     ventana.add(CaF); ventana.add(FaC);
+    ventana.add(USD); ventana.add(COP);
 
     ventana.setVisible(true);
     ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
